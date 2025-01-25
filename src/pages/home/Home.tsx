@@ -19,7 +19,7 @@ class Home extends React.Component<HomeProps, State> {
       <Box>
         <Grid
           container
-          minHeight="85vh"
+          minHeight={{ xs: "100vh", md: "85vh" }}
           sx={{
             paddingX: {
               xs: "2em",
@@ -34,6 +34,7 @@ class Home extends React.Component<HomeProps, State> {
         >
           <Grid
             sx={{
+              height: { xs: "100vh", md: "auto" },
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -141,6 +142,74 @@ class Home extends React.Component<HomeProps, State> {
                 backgroundPosition: "center",
               }}
             />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          height="60vh"
+          sx={{
+            backgroundColor: "#CAC6E4",
+            paddingX: {
+              xs: "2em",
+              sm: "2em",
+              md: "2em",
+              lg: "4em",
+              xl: "12em",
+            },
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Grid
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            order={{ xs: 2, md: 1 }}
+            size={{ xs: 12, sm: 12, md: 7, lg: 6, xl: 6 }}
+          >
+            <Typography>Teste</Typography>
+          </Grid>
+          <Grid
+            sx={{
+              height: { xl: "100%" },
+              paddingX: { xs: "1em", md: "1.1em", xl: "3em" },
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+            order={{ xs: 1, md: 2 }}
+            size={{ xs: 12, sm: 12, md: 5, lg: 6, xl: 6 }}
+          >
+            <Typography
+              sx={{
+                fontWeight: 500,
+                textAlign: "left",
+                fontSize: { xs: "1.2em", md: "1.2em", xl: "1.5em" },
+                color: "#743992",
+              }}
+            >
+              Sobre nós
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: 500,
+                textAlign: "left",
+                fontSize: { xs: "1.8em", md: "3em", xl: "3em" },
+                color: "#743992",
+                paddingRight: { xl: "2em" },
+              }}
+            >
+              Somos uma Organização dedicada à Proteção e Apoio.
+            </Typography>
+            <Typography sx={{ color: "#743992", mt: "2em" }}>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Accusamus, sit aliquid quia, voluptas doloribus dolorum sint
+              inventore cupiditate dolore voluptatum, adipisci dolorem placeat
+              consequuntur quo perferendis ea enim natus voluptatibus.
+            </Typography>
           </Grid>
         </Grid>
       </Box>

@@ -21,20 +21,51 @@ import React from "react";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
 
-type State = {};
+type State = {
+  selectedNavValue: string;
+  isModalOpen: boolean;
+};
 
-const conenector = connect((state: State) => {
+const connector = connect((state: State) => {
   return {};
 });
 
-type HomeHomeNavbarProps = ConnectedProps<typeof conenector>;
+type HomeHomeNavbarProps = ConnectedProps<typeof connector>;
 
 class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
   constructor(props: HomeHomeNavbarProps) {
     super(props);
+
+    this.state = {
+      selectedNavValue: "home",
+      isModalOpen: false,
+    };
   }
 
   componentDidMount(): void {}
+
+  handleChangeToggleButton = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    this.setState({ selectedNavValue: newAlignment });
+  };
+
+  handleToggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+
+      this.setState({
+        isModalOpen: open,
+      });
+    };
 
   render() {
     const logoUrl = "/src/assets/images/logo.png";
@@ -100,18 +131,23 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
             },
           }}
           anchor={"right"}
-          open={false}
-          onClose={() => {}}
-          onOpen={() => {}}
+          open={this.state.isModalOpen}
+          onClose={this.handleToggleDrawer(false)}
+          onOpen={this.handleToggleDrawer(true)}
         >
           <Box sx={{ paddingTop: "4vh" }}>{list()}</Box>
         </SwipeableDrawer>
         <Grid
           container
           sx={{
-            height: "12vh",
+            zIndex: 100,
+            position: { xs: "fixed", sm: "fixed", md: "relative" },
+            height: { xs: "10vh", sm: "10vh", md: "15vh" },
             width: "100%",
-            backgroundColor: "transparent",
+            background: {
+              xs: "linear-gradient(0deg, rgba(116,57,146,0.7464585932029062) 0%, rgba(116,57,146,1) 100%)",
+              md: "transparent",
+            },
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -178,12 +214,12 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
               },
             }}
           >
-            {/* Botão de navegação */}
+            {/* Botão de navegação */}
             <ToggleButtonGroup
-              value={1}
+              value={this.state.selectedNavValue}
               exclusive
-              onChange={() => {}}
-              aria-label="Platform"
+              onChange={this.handleChangeToggleButton}
+              aria-label="toggleButtonGroup"
               sx={{
                 display: { xs: "none", md: "flex" },
                 backgroundColor: "#CEF9FE21",
@@ -192,31 +228,63 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
               }}
             >
               <ToggleButton
-                sx={{ color: "#fff", borderRadius: "25px", minWidth: "100px" }}
-                value="web"
+                sx={{
+                  color: "#fff",
+                  borderRadius: "25px",
+                  minWidth: "100px",
+                  backgroundColor:
+                    this.state.selectedNavValue === "home"
+                      ? "#fff"
+                      : "transparent",
+                }}
+                value={"home"}
               >
                 HOME
               </ToggleButton>
               <ToggleButton
-                sx={{ color: "#fff", borderRadius: "25px", minWidth: "90px" }}
-                value="android"
+                sx={{
+                  color: "#fff",
+                  borderRadius: "25px",
+                  minWidth: "90px",
+                  backgroundColor:
+                    this.state.selectedNavValue === "sobre"
+                      ? "#fff"
+                      : "transparent",
+                }}
+                value="sobre"
               >
                 SOBRE
               </ToggleButton>
               <ToggleButton
-                sx={{ color: "#fff", borderRadius: "25px", minWidth: "90px" }}
-                value="ios"
+                sx={{
+                  color: "#fff",
+                  borderRadius: "25px",
+                  minWidth: "90px",
+                  backgroundColor:
+                    this.state.selectedNavValue === "contato"
+                      ? "#fff"
+                      : "transparent",
+                }}
+                value="contato"
               >
                 CONTATO
               </ToggleButton>
               <ToggleButton
-                sx={{ color: "#fff", borderRadius: "25px", minWidth: "100px" }}
-                value="ios"
+                sx={{
+                  color: "#fff",
+                  borderRadius: "25px",
+                  minWidth: "100px",
+                  backgroundColor:
+                    this.state.selectedNavValue === "denunciar"
+                      ? "#fff"
+                      : "transparent",
+                }}
+                value="denunciar"
               >
                 DENUNCIAR
               </ToggleButton>
             </ToggleButtonGroup>
-            {/* Botão de login */}
+            {/* Botão de login */}
             <Button
               sx={{
                 display: { xs: "none", md: "flex" },
@@ -236,6 +304,7 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
               <Typography>Acessar</Typography>
             </Button>
             <IconButton
+              onClick={this.handleToggleDrawer(true)}
               sx={{
                 display: { xs: "flex", md: "none" },
                 padding: "10px",
@@ -255,4 +324,5 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
     );
   }
 }
-export default conenector(HomeNavbar);
+
+export default connector(HomeNavbar);
