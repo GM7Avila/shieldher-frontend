@@ -142,10 +142,10 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
           sx={{
             zIndex: 100,
             position: { xs: "fixed", sm: "fixed", md: "relative" },
-            height: { xs: "10vh", sm: "10vh", md: "15vh" },
+            height: { xs: "8vh", sm: "10vh", md: "15vh" },
             width: "100%",
             background: {
-              xs: "linear-gradient(0deg, rgba(116,57,146,0.7464585932029062) 0%, rgba(116,57,146,1) 100%)",
+              xs: "linear-gradient(180deg, rgba(116,57,146,1) 0%, rgba(116,57,146,0.9761504699536064) 100%)",
               md: "transparent",
             },
             display: "flex",
@@ -253,7 +253,7 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
                 }}
                 value="sobre"
               >
-                SOBRE
+                FAQ
               </ToggleButton>
               <ToggleButton
                 sx={{

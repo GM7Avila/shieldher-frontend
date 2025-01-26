@@ -1,5 +1,5 @@
-import "@fontsource/titillium-web/400.css"; // Regular
-import "@fontsource/titillium-web/700.css"; // Bold
+import "@fontsource/titillium-web/400.css";
+import "@fontsource/titillium-web/700.css";
 
 import { createTheme } from "@mui/material";
 
