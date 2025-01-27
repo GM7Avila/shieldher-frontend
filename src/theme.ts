@@ -5,10 +5,10 @@ import { createTheme } from "@mui/material";
 
 const colors = {
   primary: {
-    light: "#fff",
-    main: "#3f50b5",
-    dark: "#002884",
-    contrastText: "#fff",
+    light: "#dda3ff",
+    main: "#c779f2",
+    dark: "#a55fce",
+    contrastText: "#c779f2",
   },
   secondary: {
     light: "#ff7961",
@@ -51,6 +51,38 @@ export const theme = createTheme({
     text: {
       primary: colors.text.primary,
       secondary: colors.text.secondary,
+    },
+  },
+  // COMPONENTES MUI
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: colors.primary.main, // Cor do contorno
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: colors.primary.light, // Cor do contorno ao passar o mouse
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: colors.primary.light, // Cor do contorno quando estiver focado
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: colors.text.primary, // Cor do rótulo do TextField
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          color: colors.text.secondary, // Cor do texto de ajuda do TextField
+        },
+      },
     },
   },
 });

@@ -20,7 +20,6 @@ import React from "react";
 // icons
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
-
 type State = {
   selectedNavValue: string;
   isModalOpen: boolean;
@@ -73,21 +72,28 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
     const list = () => (
       <>
         <List>
-          {["Home", "Sobre", "Contato", "Denunciar"].map((text, index) => (
+          {[
+            { text: "Home", link: "/" },
+            { text: "Sobre", link: "/sobre" },
+            { text: "Contato", link: "/contato" },
+            { text: "Apoio", link: "/apoio" },
+          ].map(({ text, link }) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon
-                  sx={{
-                    padding: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#ecc9ff",
-                    gap: "20px",
-                  }}
-                >
-                  <Typography sx={{ fontSize: "22px" }}>{text}</Typography>
-                </ListItemIcon>
-              </ListItemButton>
+              <Link to={link} style={{ textDecoration: "none", width: "100%" }}>
+                <ListItemButton>
+                  <ListItemIcon
+                    sx={{
+                      padding: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      color: "#ecc9ff",
+                      gap: "20px",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "22px" }}>{text}</Typography>
+                  </ListItemIcon>
+                </ListItemButton>
+              </Link>
             </ListItem>
           ))}
         </List>
@@ -100,20 +106,22 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
         />
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon
-                sx={{
-                  padding: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  color: "#ecc9ff",
-                  gap: "20px",
-                }}
-              >
-                <LoginIcon />
-                <Typography sx={{ fontSize: "22px" }}>Login</Typography>
-              </ListItemIcon>
-            </ListItemButton>
+            <Link to="/login" style={{ textDecoration: "none", width: "100%" }}>
+              <ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    padding: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                    color: "#ecc9ff",
+                    gap: "20px",
+                  }}
+                >
+                  <LoginIcon />
+                  <Typography sx={{ fontSize: "22px" }}>Acessar</Typography>
+                </ListItemIcon>
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
       </>
@@ -281,28 +289,41 @@ class HomeNavbar extends React.Component<HomeHomeNavbarProps, State> {
                 }}
                 value="denunciar"
               >
-                DENUNCIAR
+                APOIO
               </ToggleButton>
             </ToggleButtonGroup>
             {/* Botão de login */}
-            <Button
-              sx={{
-                display: { xs: "none", md: "flex" },
-                paddingX: "10px",
-                borderRadius: "25px",
-                gap: "10px",
-                backgroundColor: "transparent",
-                color: "#CAC6E4",
+            <Link
+              to="/login"
+              style={{
+                textDecoration: "none",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <LoginIcon
+              <Button
                 sx={{
-                  width: { xs: "35px", sm: "25px" },
-                  height: { xs: "35px", sm: "25px" },
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingX: "10px",
+                  borderRadius: "25px",
+                  gap: "10px",
+                  backgroundColor: "transparent",
+                  color: "#CAC6E4",
                 }}
-              />
-              <Typography>Acessar</Typography>
-            </Button>
+              >
+                <LoginIcon
+                  sx={{
+                    width: { xs: "35px", sm: "25px" },
+                    height: { xs: "35px", sm: "25px" },
+                  }}
+                />
+                <Typography>Acessar</Typography>
+              </Button>
+            </Link>
             <IconButton
               onClick={this.handleToggleDrawer(true)}
               sx={{

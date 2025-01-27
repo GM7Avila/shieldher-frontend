@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import Grid from "@mui/material/Grid2";
+import { Link } from "react-router-dom";
 
 type State = {};
 
@@ -81,27 +82,29 @@ const Home: React.FC<State> = () => {
             e ajude na luta contra a misoginia em ambientes digitais de forma
             eficaz.
           </Typography>
-          <Button
-            sx={{
-              fontSize: "1.1em",
-              marginTop: "5em",
-              color: "white",
-              background:
-                "linear-gradient(140deg, rgba(116,57,146,1) 0%, rgba(140,95,162,1) 21%, rgba(155,125,179,1) 73%, rgba(165,146,191,1) 87%, rgba(179,174,206,1) 99%)",
-              width: { xs: "100%", sm: "95%", md: "60%", lg: "250px" },
-              height: "50px",
-              border: "none",
-              borderRadius: "5px",
-              transition: "all 0.5s ease-in-out",
-              "&:hover": {
+          <Link to="/login">
+            <Button
+              sx={{
+                fontSize: "1.1em",
+                marginTop: "5em",
+                color: "white",
                 background:
                   "linear-gradient(140deg, rgba(116,57,146,1) 0%, rgba(140,95,162,1) 21%, rgba(155,125,179,1) 73%, rgba(165,146,191,1) 87%, rgba(179,174,206,1) 99%)",
-                boxShadow: "0 4px 16px rgba(179,174,206,0.8)",
-              },
-            }}
-          >
-            Começar
-          </Button>
+                width: { xs: "100%", sm: "95%", md: "60%", lg: "250px" },
+                height: "50px",
+                border: "none",
+                borderRadius: "5px",
+                transition: "all 0.5s ease-in-out",
+                "&:hover": {
+                  background:
+                    "linear-gradient(140deg, rgba(116,57,146,1) 0%, rgba(140,95,162,1) 21%, rgba(155,125,179,1) 73%, rgba(165,146,191,1) 87%, rgba(179,174,206,1) 99%)",
+                  boxShadow: "0 4px 16px rgba(179,174,206,0.8)",
+                },
+              }}
+            >
+              Começar
+            </Button>
+          </Link>
         </Grid>
         <Grid
           size={{ xs: 12, sm: 12, md: 12, lg: 4, xl: 4 }}

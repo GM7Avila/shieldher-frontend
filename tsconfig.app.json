@@ -1,4 +1,7 @@
 {
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
@@ -36,10 +39,7 @@
       ],
       "@store/*": [
         "src/store/*"
-      ],
+      ]
     },
-    "include": [
-      "src"
-    ]
-  }
+  },
 }

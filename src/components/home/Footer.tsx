@@ -249,7 +249,7 @@ const Footer: React.FC = () => {
             Links Rápidos
           </Typography>
           <Typography sx={{ color: "#CAC6E4", marginBottom: "5px" }}>
-            Home
+            Apoio
           </Typography>
           <Typography sx={{ color: "#CAC6E4", marginBottom: "5px" }}>
             FAQ
@@ -311,7 +311,7 @@ const Footer: React.FC = () => {
                       color: "#f1d8ff",
                     }}
                   >
-                    Receba Boletim Informativo no seu Email
+                    Receba um Boletim Informativo no seu Email
                   </span>
                 }
                 sx={{ fontSize: "50px" }}
@@ -352,8 +352,8 @@ const Footer: React.FC = () => {
               fontSize: "15px",
               color: "#CAC6E4",
               marginTop: { xs: "30px", sm: "50px", md: "auto", lg: "auto" },
-              textAlign: "right",
-              marginRight: "50px",
+              textAlign: { xs: "center", sm: "center", md: "right" },
+              marginRight: { xs: "0px", sm: "0px", md: "50px", lg: "100px" },
               marginBottom: "10px",
             }}
           >

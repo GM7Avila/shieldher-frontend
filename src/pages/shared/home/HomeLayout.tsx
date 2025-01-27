@@ -1,6 +1,6 @@
-import HomeNavbar from "@components/HomeNavbar";
+import HomeNavbar from "@components/home/HomeNavbar";
 import { Outlet } from "react-router";
-import Footer from "./Footer";
+import Footer from "../../../components/home/Footer";
 
 const HomeLayout = () => {
   return (
