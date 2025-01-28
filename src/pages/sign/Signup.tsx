@@ -11,7 +11,7 @@ import {
 import Grid from "@mui/material/Grid2";
 
 import { Link } from "react-router-dom";
-import { FormWrapper } from "../../forms/ReactHookFormWrapper";
+import { FormWrapper } from "../../forms/SignFormWrapper";
 import {
   signUpSchema,
   SignUpFormData,
@@ -462,7 +462,10 @@ class SignUp extends React.Component<{}, State> {
               >
                 <Checkbox
                   {...register("terms")}
-                  sx={{ bottom: "0.5px", color: "#ECC9FF" }}
+                  sx={{
+                    bottom: "0.5px",
+                    color: formState.errors.terms ? "error.main" : "#ECC9FF",
+                  }}
                   {...label}
                 />
                 <Typography
@@ -488,9 +491,25 @@ class SignUp extends React.Component<{}, State> {
                 </Typography>
               </Box>
               {formState.errors.terms?.message && (
-                <Typography sx={{ color: "error.main", fontSize: "14px" }}>
-                  <li>{formState.errors.terms?.message}</li>
-                </Typography>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    gap: "8px",
+                    flexDirection: "column",
+                    paddingLeft: "10px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "error.main",
+                      fontSize: "14px",
+                      textAlign: "start",
+                    }}
+                  >
+                    <li>{formState.errors.terms?.message}</li>
+                  </Typography>
+                </Box>
               )}
 
               <Button

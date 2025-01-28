@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { FormWrapper } from "../../forms/ReactHookFormWrapper";
+import { FormWrapper } from "../../forms/SignFormWrapper";
 import {
   loginSchema,
   LoginFormData,
