@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import "./assets/style/index.css";
 import HomeLayout from "./pages/shared/home/HomeLayout";
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
+import Login from "./pages/sign/Login";
+import SignUp from "./pages/sign/Signup";
 ("./pages/login/Login");
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/denunciar" element={<Home />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </>
   );

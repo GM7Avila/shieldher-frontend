@@ -26,7 +26,7 @@ type State = {
   showPassword: boolean;
 };
 
-class LoginForm extends React.Component<{}, State> {
+class Login extends React.Component<{}, State> {
   state = {
     showPassword: false,
   };
@@ -319,4 +319,4 @@ class LoginForm extends React.Component<{}, State> {
   }
 }
 
-export default LoginForm;
+export default Login;

@@ -12,9 +12,15 @@ const colors = {
   },
   secondary: {
     light: "#ff7961",
-    main: "#f44336",
+    main: "#ff3f56",
     dark: "#ba000d",
     contrastText: "#000",
+  },
+  error: {
+    light: "#ff7272", // Cor clara para erros
+    main: "#ff7272", // Cor principal de erro
+    dark: "#ff7272", // Cor escura para erros
+    contrastText: "#ff8787", // Texto contrastante
   },
   background: {
     default: "#743992",
@@ -44,6 +50,7 @@ export const theme = createTheme({
   palette: {
     primary: colors.primary,
     secondary: colors.secondary,
+    error: colors.error, // Define a paleta de erro
     background: {
       default: colors.background.default,
       paper: colors.background.paper,
@@ -67,6 +74,16 @@ export const theme = createTheme({
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: colors.primary.light, // Cor do contorno quando estiver focado
           },
+          "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+            borderColor: colors.error.main, // Cor do contorno quando houver erro
+          },
+          "input:-webkit-autofill": {
+            WebkitBoxShadow: "0 0 0 1000px #573769 inset !important", // Cor de fundo
+            WebkitTextFillColor: "#fff !important", // Cor do texto
+            WebkitTextDecoration: "none !important", // Remover qualquer decoração do texto
+            WebkitAppearance: "none", // Remover a aparência nativa do input (caso necessário)
+            WebkitTapHighlightColor: "transparent !important", // Remover highlight ao clicar
+          },
         },
       },
     },
@@ -74,13 +91,19 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: colors.text.primary, // Cor do rótulo do TextField
+          "&.Mui-error": {
+            color: colors.error.main, // Cor do label em caso de erro
+          },
         },
       },
     },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          color: colors.text.secondary, // Cor do texto de ajuda do TextField
+          color: colors.text.secondary,
+          "&.Mui-error": {
+            color: colors.error.main,
+          },
         },
       },
     },

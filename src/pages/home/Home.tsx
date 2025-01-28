@@ -82,7 +82,7 @@ const Home: React.FC<State> = () => {
             e ajude na luta contra a misoginia em ambientes digitais de forma
             eficaz.
           </Typography>
-          <Link to="/login">
+          <Link style={{ width: "100%" }} to="/login">
             <Button
               sx={{
                 fontSize: "1.1em",
