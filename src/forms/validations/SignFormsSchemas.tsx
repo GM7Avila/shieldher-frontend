@@ -1,7 +1,14 @@
 import * as z from "zod";
 import { addressRegex, phoneRegex, passwordRegex } from "../validations/regex";
+import { validateCep } from "./validateViaCep";
 
-// ZOD: schema do login
+/**
+ * Schema Zod para validação de login.
+ *
+ * Valida o email e a senha do usuário.
+ * - O campo "email" deve ser uma string não vazia e seguir o formato de um email válido.
+ * - O campo "password" deve ser uma string não vazia.
+ */
 export const loginSchema = z.object({
   email: z
     .string()
@@ -10,7 +17,18 @@ export const loginSchema = z.object({
   password: z.string().nonempty("Preencha o campo de senha"),
 });
 
-// ZOD: schema do login
+/**
+ * Schema Zod para validação de cadastro (signup).
+ *
+ * Valida os campos necessários para o cadastro do usuário.
+ * - "name": campo de nome não vazio.
+ * - "email": campo de email não vazio e com formato válido.
+ * - "password": senha com requisitos de comprimento, caracteres especiais, maiúsculas e números.
+ * - "passwordConfirmation": confirmação de senha que deve coincidir com a senha.
+ * - "phone": número de telefone com formato válido.
+ * - "address": endereço com formato válido de CEP e validação via consulta ao serviço de CEP.
+ * - "terms": confirmação de aceitação dos termos de uso.
+ */
 export const signUpSchema = z
   .object({
     name: z.string().nonempty("Preencha o campo de nome"),
@@ -39,7 +57,10 @@ export const signUpSchema = z
     address: z
       .string()
       .nonempty("Preencha o campo de endereço")
-      .regex(addressRegex, "Insira um CEP válido (formato 00000-000)"),
+      .regex(addressRegex, "Formato inválido (formato 00000-000)")
+      .refine(async (cep) => await validateCep(cep), {
+        message: "CEP inexistente, por favor insira um CEP valido",
+      }),
     terms: z.boolean().refine((val) => val === true, {
       message: "Você deve aceitar os Termos de Uso.",
     }),
@@ -54,6 +75,9 @@ export const signUpSchema = z
     }
   });
 
-// Tipagem dos schemas
+/**
+ * Tipagem dos Schemas
+ */
 export type LoginFormData = z.infer<typeof loginSchema>;
+
 export type SignUpFormData = z.infer<typeof signUpSchema>;
