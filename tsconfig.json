@@ -11,8 +11,12 @@
   // zod
   "compilerOptions": {
     "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
     "types": [
-      "@hookform/resolvers"
+      "@hookform/resolvers",
+      "@types/react-input-mask"
     ]
   }
 }

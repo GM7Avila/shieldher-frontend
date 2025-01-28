@@ -5,9 +5,8 @@ import {
   Box,
   Typography,
   InputAdornment,
-  Divider,
-  IconButton,
   Checkbox,
+  Modal,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
@@ -24,22 +23,38 @@ import KeyIcon from "@mui/icons-material/Key";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import InputMask from "react-input-mask";
+import { Controller } from "react-hook-form";
+import TermsModal from "@components/sign/TermsModal";
 
 type State = {
-  showPassword: boolean;
+  isShowPassword: boolean;
+  isTermsModalOpen: boolean;
 };
 
 class SignUp extends React.Component<{}, State> {
   state = {
-    showPassword: false,
+    isShowPassword: false,
+    isTermsModalOpen: false,
   };
 
+  // CHECKBOX: EXIBIR SENHA
   handleClickShowPassword = () => {
     this.setState((prevState) => ({
-      showPassword: !prevState.showPassword,
+      isShowPassword: !prevState.isShowPassword,
     }));
   };
 
+  // CHECKBOX: MODAL TERMOS DE USO
+  handleOpenTermsModal = () => {
+    this.setState({ isTermsModalOpen: true });
+  };
+
+  handleCloseTermsModal = () => {
+    this.setState({ isTermsModalOpen: false });
+  };
+
+  // SUBMIT: ENVIO DO FORMULÁRIO
   handleFormSubmit = (data: any) => {
     console.log("Form Data Submitted:", data);
   };
@@ -47,14 +62,14 @@ class SignUp extends React.Component<{}, State> {
   render() {
     const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-    const { showPassword } = this.state;
+    const { isShowPassword } = this.state;
 
     return (
       <FormWrapper<SignUpFormData>
         onSubmit={this.handleFormSubmit}
         schema={signUpSchema}
       >
-        {({ register, formState }) => (
+        {({ register, formState, control }) => (
           <Box
             sx={{
               display: "flex",
@@ -179,83 +194,113 @@ class SignUp extends React.Component<{}, State> {
                   ),
                 }}
               />
-              <TextField
-                {...register("phone")}
-                error={!!formState.errors.phone}
-                helperText={
-                  typeof formState.errors.phone?.message === "string"
-                    ? formState.errors.phone?.message
-                    : ""
-                }
-                color="primary"
-                sx={{
-                  width: "100%",
-                  "& .MuiInputBase-input": {
-                    color: "#ECC9FF",
-                    height: { xs: "10px", lg: "23px" },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "#b690ce",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: "#ECC9FF",
-                  },
-                  "& .MuiInputAdornment-root .MuiSvgIcon-root": {
-                    color: "#835d99",
-                  },
-                  "& .Mui-focused .MuiInputAdornment-root .MuiSvgIcon-root": {
-                    color: "#ECC9FF",
-                  },
-                }}
-                id="outlined-basic"
-                label="Telefone"
-                variant="outlined"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <LocalPhoneIcon sx={{ fontSize: "20px" }} />
-                    </InputAdornment>
-                  ),
-                }}
+
+              <Controller
+                name="phone"
+                control={control}
+                render={({ field }) => (
+                  <InputMask {...field} mask="(99) 99999-9999">
+                    {(inputProps: any) => (
+                      <TextField
+                        {...inputProps}
+                        error={!!formState.errors.phone}
+                        helperText={
+                          typeof formState.errors.phone?.message === "string"
+                            ? formState.errors.phone?.message
+                            : ""
+                        }
+                        color="primary"
+                        sx={{
+                          width: "100%",
+                          "& .MuiInputBase-input": {
+                            color: "#ECC9FF",
+                            height: { xs: "10px", lg: "23px" },
+                          },
+                          "& .MuiInputLabel-root": {
+                            color: "#b690ce",
+                          },
+                          "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#ECC9FF",
+                          },
+                          "& .MuiInputAdornment-root .MuiSvgIcon-root": {
+                            color: "#835d99",
+                          },
+                          "& .Mui-focused .MuiInputAdornment-root .MuiSvgIcon-root":
+                            {
+                              color: "#ECC9FF",
+                            },
+                        }}
+                        id="outlined-basic"
+                        label="Telefone"
+                        variant="outlined"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <LocalPhoneIcon sx={{ fontSize: "20px" }} />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                  </InputMask>
+                )}
               />
-              <TextField
-                {...register("address")}
-                error={!!formState.errors.address}
-                helperText={
-                  typeof formState.errors.address?.message === "string"
-                    ? formState.errors.address?.message
-                    : ""
-                }
-                color="primary"
-                sx={{
-                  width: "100%",
-                  "& .MuiInputBase-input": {
-                    color: "#ECC9FF",
-                    height: { xs: "10px", lg: "23px" },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "#b690ce",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: "#ECC9FF",
-                  },
-                  "& .MuiInputAdornment-root .MuiSvgIcon-root": {
-                    color: "#835d99",
-                  },
-                  "& .Mui-focused .MuiInputAdornment-root .MuiSvgIcon-root": {
-                    color: "#ECC9FF",
-                  },
-                }}
-                id="outlined-basic"
-                label="CEP"
-                variant="outlined"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <MarkunreadMailboxIcon sx={{ fontSize: "20px" }} />
-                    </InputAdornment>
-                  ),
-                }}
+              <Controller
+                name="address"
+                control={control}
+                render={({ field }) => (
+                  <InputMask
+                    mask="99999-999"
+                    value={field.value || ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                  >
+                    {(inputProps: any) => (
+                      <TextField
+                        {...inputProps}
+                        error={!!formState.errors.address}
+                        helperText={
+                          typeof formState.errors.address?.message === "string"
+                            ? formState.errors.address?.message
+                            : ""
+                        }
+                        color="primary"
+                        sx={{
+                          width: "100%",
+                          "& .MuiInputBase-input": {
+                            color: "#ECC9FF",
+                            height: { xs: "10px", lg: "23px" },
+                          },
+                          "& .MuiInputLabel-root": {
+                            color: "#b690ce",
+                          },
+                          "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#ECC9FF",
+                          },
+                          "& .MuiInputAdornment-root .MuiSvgIcon-root": {
+                            color: "#835d99",
+                          },
+                          "& .Mui-focused .MuiInputAdornment-root .MuiSvgIcon-root":
+                            {
+                              color: "#ECC9FF",
+                            },
+                        }}
+                        id="outlined-basic"
+                        label="CEP"
+                        variant="outlined"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <MarkunreadMailboxIcon
+                                sx={{ fontSize: "20px" }}
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                  </InputMask>
+                )}
               />
 
               <Grid
@@ -296,7 +341,7 @@ class SignUp extends React.Component<{}, State> {
                     id="outlined-basic"
                     label="Senha"
                     variant="outlined"
-                    type={showPassword ? "text" : "password"}
+                    type={isShowPassword ? "text" : "password"}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -335,7 +380,7 @@ class SignUp extends React.Component<{}, State> {
                     id="outlined-basic"
                     label="Confirmar Senha"
                     variant="outlined"
-                    type={showPassword ? "text" : "password"}
+                    type={isShowPassword ? "text" : "password"}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -381,7 +426,6 @@ class SignUp extends React.Component<{}, State> {
                   </Typography>
                 </Box>
               )}
-
               <Box
                 sx={{
                   width: "100%",
@@ -417,6 +461,7 @@ class SignUp extends React.Component<{}, State> {
                 }}
               >
                 <Checkbox
+                  {...register("terms")}
                   sx={{ bottom: "0.5px", color: "#ECC9FF" }}
                   {...label}
                 />
@@ -428,6 +473,7 @@ class SignUp extends React.Component<{}, State> {
                 >
                   Li e concordo com os{" "}
                   <span
+                    onClick={() => this.handleOpenTermsModal()}
                     style={{
                       color: "#dca0ff",
                       cursor: "pointer",
@@ -441,6 +487,12 @@ class SignUp extends React.Component<{}, State> {
                   *
                 </Typography>
               </Box>
+              {formState.errors.terms?.message && (
+                <Typography sx={{ color: "error.main", fontSize: "14px" }}>
+                  <li>{formState.errors.terms?.message}</li>
+                </Typography>
+              )}
+
               <Button
                 type="submit"
                 sx={{
@@ -484,6 +536,10 @@ class SignUp extends React.Component<{}, State> {
                 </Link>
               </Box>
             </Box>
+            <TermsModal
+              open={this.state.isTermsModalOpen}
+              onClose={this.handleCloseTermsModal}
+            />
           </Box>
         )}
       </FormWrapper>

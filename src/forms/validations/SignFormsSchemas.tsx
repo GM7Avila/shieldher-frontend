@@ -40,6 +40,9 @@ export const signUpSchema = z
       .string()
       .nonempty("Preencha o campo de endereço")
       .regex(addressRegex, "Insira um CEP válido (formato 00000-000)"),
+    terms: z.boolean().refine((val) => val === true, {
+      message: "Você deve aceitar os Termos de Uso.",
+    }),
   })
   .superRefine(({ passwordConfirmation, password }, ctx) => {
     if (passwordConfirmation !== password) {
