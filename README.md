@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# ShieldHer - Landing Page | FuzzyLab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**ShieldHer** is a project under [FuzzyLab](https://fuzzylab.tech/), a scientific organization focused on developing innovative systems using Artificial Intelligence (AI). The goal of ShieldHer is to provide support, resources, and raise awareness about online harassment and misogyny. This landing page represents the main home interface, showcasing the project's identity and purpose.
 
-Currently, two official plugins are available:
+It was developed by me as part of my work as a frontend developer, focusing on creating the main landing page as well as other internal screens of the system. The development was done using React + TypeScript and Material UI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![screencapture-localhost-5173-2025-02-21-17_21_37](https://github.com/user-attachments/assets/b8dac8fb-bd73-4b21-989e-16db62c347f2)
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React.js
+- TypeScript
+- Material UI
+- Vite
 
-- Configure the top-level `parserOptions` property like this:
+## How to Run
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/repository-name.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+npm install
+```
+
+3. Start the Project:
+
+```
+npm run dev
+```
+
+The application will be available at http://localhost:5173.
+
+<hr>
+
+© 2025 FuzzyLab®. All rights reserved.
